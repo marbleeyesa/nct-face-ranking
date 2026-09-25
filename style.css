@@ -1,12 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Jost:wght@400;500;600;700;800&family=Nunito:wght@400;600;700;800&display=swap');
+
+
+/* =========================
+   全体
+========================= */
+
 * {
   box-sizing: border-box;
 }
 
 body {
   margin: 0;
-  background: #f7f8f5;
-  font-family: Arial, "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+  background: #f5f6f1;
   color: #222;
+  font-family: "Nunito", "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+  overflow-x: hidden;
 }
 
 .container {
@@ -15,6 +23,7 @@ body {
   padding: 40px 20px 60px;
   text-align: center;
 }
+
 
 /* =========================
    スタート画面
@@ -31,39 +40,46 @@ body {
 #start-screen h1 {
   position: relative;
   display: inline-block;
-  font-size: 42px;
-  margin: 0 0 30px;
-  letter-spacing: 2px;
-  color: #222;
+  margin: 0 0 28px;
+  color: #111;
+  font-family: "Baloo 2", sans-serif;
+  font-size: 46px;
   font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: 1px;
 }
 
 #start-screen h1::after {
   content: "";
   display: block;
-  width: 55px;
-  height: 5px;
+  width: 65px;
+  height: 7px;
+  margin: 12px auto 0;
   background: #b8ff00;
   border-radius: 999px;
-  margin: 12px auto 0;
+  transform: rotate(-2deg);
 }
 
 .description {
-  font-size: 18px;
-  line-height: 1.8;
   margin: 0 0 20px;
+  font-family: "Nunito", sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.8;
 }
 
 .notes {
-  font-size: 14px;
-  color: #777;
-  line-height: 1.6;
   margin: 0 0 30px;
+  color: #777;
+  font-family: "Jost", sans-serif;
+  font-size: 13px;
+  line-height: 1.7;
 }
 
 .notes p {
   margin: 5px 0;
 }
+
 
 /* =========================
    スタートボタン
@@ -71,27 +87,30 @@ body {
 
 #start-button {
   display: inline-block;
-  padding: 16px 70px;
-  border: none;
+  padding: 15px 65px;
+  border: 3px solid #222;
   border-radius: 999px;
   background: #b8ff00;
   color: #111;
-  font-size: 18px;
-  font-weight: bold;
+  font-family: "Jost", sans-serif;
+  font-size: 17px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
   cursor: pointer;
-  box-shadow: 0 6px 0 #8dbf00;
-  transition: 0.15s;
+  box-shadow: 0 6px 0 #222;
+  transition: 0.15s ease;
 }
 
 #start-button:hover {
   transform: translateY(-3px);
-  box-shadow: 0 9px 0 #8dbf00;
+  box-shadow: 0 9px 0 #222;
 }
 
 #start-button:active {
   transform: translateY(3px);
-  box-shadow: 0 3px 0 #8dbf00;
+  box-shadow: 0 3px 0 #222;
 }
+
 
 /* =========================
    ランキング画面
@@ -104,21 +123,24 @@ body {
 #ranking-screen h1 {
   position: relative;
   display: inline-block;
-  margin: 0 0 25px;
-  font-size: 32px;
-  letter-spacing: 1px;
+  margin: 0 0 22px;
+  color: #111;
+  font-family: "Baloo 2", sans-serif;
+  font-size: 34px;
   font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: 1px;
 }
 
 #ranking-screen h1::after {
-  content: "";
+  content: "✦";
   display: block;
-  width: 42px;
-  height: 4px;
-  background: #b8ff00;
-  border-radius: 999px;
-  margin: 10px auto 0;
+  margin-top: 5px;
+  color: #b8ff00;
+  font-family: Arial, sans-serif;
+  font-size: 18px;
 }
+
 
 /* =========================
    説明
@@ -126,15 +148,18 @@ body {
 
 #instruction {
   display: inline-block;
-  margin: 0 0 30px;
+  margin: 0 0 25px;
   padding: 9px 20px;
+  border: 2px solid #222;
   border-radius: 999px;
   background: #222;
   color: #fff;
-  font-size: 16px;
-  font-weight: bold;
-  letter-spacing: 0.5px;
+  font-family: "Jost", sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
 }
+
 
 /* =========================
    メンバーエリア
@@ -143,8 +168,9 @@ body {
 #member-area {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
+  gap: 18px;
 }
+
 
 /* =========================
    メンバーカード
@@ -152,40 +178,43 @@ body {
 
 .member-card {
   position: relative;
+  padding: 10px;
+  overflow: hidden;
+  border: 3px solid #222;
+  border-radius: 20px;
   background: #fff;
-  border-radius: 22px;
-  padding: 15px;
+  box-shadow: 5px 5px 0 #222;
   cursor: pointer;
-  border: 3px solid transparent;
-  box-shadow: 0 5px 18px rgba(0, 0, 0, 0.06);
+
   transition:
     transform 0.2s ease,
     border-color 0.2s ease,
     background 0.2s ease,
     box-shadow 0.2s ease;
-  overflow: hidden;
 }
 
 .member-card:hover {
-  transform: translateY(-4px);
-  border-color: #dfff9c;
-  box-shadow: 0 9px 24px rgba(0, 0, 0, 0.09);
+  transform: translate(-2px, -4px);
+  border-color: #222;
+  box-shadow: 7px 8px 0 #b8ff00;
 }
 
 .member-card.selected {
-  border-color: #b8ff00;
-  background: #f6ffdf;
-  transform: translateY(-5px) scale(1.01);
-  box-shadow: 0 10px 25px rgba(184, 255, 0, 0.25);
+  border-color: #222;
+  background: #f1ffd1;
+  transform: translate(-2px, -4px);
+  box-shadow: 7px 8px 0 #b8ff00;
 }
 
 .member-card.selected .member-image {
-  transform: scale(1.03);
+  transform: scale(1.025);
 }
 
 .member-card:active {
-  transform: scale(0.98);
+  transform: translate(1px, 1px);
+  box-shadow: 2px 2px 0 #222;
 }
+
 
 /* =========================
    メンバー画像
@@ -196,21 +225,26 @@ body {
   width: 100%;
   aspect-ratio: 1 / 1;
   object-fit: contain;
-  border-radius: 16px;
-  margin: 0 auto 15px;
-  background: #f5f5f5;
+  margin: 0 auto 8px;
+  border-radius: 13px;
+  background: #f3f3ef;
   transition: transform 0.2s ease;
 }
+
 
 /* =========================
    メンバー名
 ========================= */
 
 .member-name {
-  font-size: 22px;
-  font-weight: bold;
-  padding: 5px 0 8px;
+  padding: 3px 0 6px;
+  color: #111;
+  font-family: "Jost", "Nunito", sans-serif;
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: 0.3px;
 }
+
 
 /* =========================
    選択チェック
@@ -219,19 +253,28 @@ body {
 .member-card.selected::after {
   content: "✓";
   position: absolute;
-  top: 12px;
-  right: 14px;
+  top: 10px;
+  right: 10px;
+
   width: 32px;
   height: 32px;
+
   display: flex;
   align-items: center;
   justify-content: center;
+
+  border: 2px solid #222;
+  border-radius: 50%;
+
   background: #b8ff00;
   color: #111;
-  border-radius: 50%;
-  font-size: 18px;
-  font-weight: bold;
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+
+  font-family: Arial, sans-serif;
+  font-size: 17px;
+  font-weight: 900;
+
+  box-shadow: 2px 2px 0 #222;
+
   animation: checkPop 0.2s ease-out;
 }
 
@@ -249,50 +292,59 @@ body {
   }
 }
 
+
 /* =========================
    次へボタン
 ========================= */
 
 #next-button {
-  margin-top: 30px;
-  padding: 15px 50px;
-  border: none;
+  margin-top: 25px;
+  padding: 13px 45px;
+
+  border: 3px solid #222;
   border-radius: 999px;
+
   background: #222;
   color: #fff;
-  font-size: 16px;
-  font-weight: bold;
+
+  font-family: "Jost", sans-serif;
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+
   cursor: pointer;
-  transition:
-    background 0.2s ease,
-    color 0.2s ease,
-    transform 0.2s ease,
-    box-shadow 0.2s ease;
+
+  box-shadow: 4px 4px 0 #b8ff00;
+
+  transition: 0.15s ease;
 }
 
 #next-button:hover {
   background: #b8ff00;
   color: #111;
-  transform: translateY(-3px);
-  box-shadow: 0 6px 15px rgba(184, 255, 0, 0.3);
+  box-shadow: 5px 5px 0 #222;
+  transform: translate(-2px, -2px);
 }
 
 #next-button:active {
-  transform: translateY(1px);
+  transform: translate(1px, 1px);
+  box-shadow: 2px 2px 0 #222;
 }
+
 
 /* =========================
    戻るボタン
 ========================= */
 
 #ranking-screen > button:not(#next-button) {
-  transition: 0.2s;
+  transition: 0.2s ease;
 }
 
 #ranking-screen > button:not(#next-button):hover {
-  background: #f6ffdf !important;
+  background: #f1ffd1 !important;
   border-color: #b8ff00 !important;
 }
+
 
 /* =========================
    最終ランキング
@@ -300,28 +352,83 @@ body {
 
 .rank-card {
   position: relative;
-  background: #fff;
-  border-radius: 22px;
   padding: 15px;
   margin-bottom: 20px;
-  box-shadow: 0 5px 18px rgba(0, 0, 0, 0.06);
-  border: 3px solid transparent;
+
+  border: 3px solid #222;
+  border-radius: 20px;
+
+  background: #fff;
+
+  box-shadow: 5px 5px 0 #222;
 }
 
 .rank-card:hover {
-  border-color: #dfff9c;
-  transform: translateY(-3px);
+  border-color: #222;
+  transform: translate(-2px, -3px);
+  box-shadow: 6px 6px 0 #b8ff00;
 }
 
 .rank-number {
+  margin-bottom: 8px;
+  color: #111;
+  font-family: "Baloo 2", sans-serif;
   font-size: 28px;
   font-weight: 800;
-  margin-bottom: 10px;
 }
 
 .rank-card .member-image {
   max-width: 280px;
 }
+
+
+/* =========================
+   最終順位選択中
+   PC
+========================= */
+
+#ranking-screen.final-mode #member-area {
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+#ranking-screen.final-mode .member-card {
+  padding: 6px;
+  border-radius: 13px;
+}
+
+#ranking-screen.final-mode .member-image {
+  border-radius: 8px;
+  margin-bottom: 3px;
+}
+
+#ranking-screen.final-mode .member-name {
+  font-size: 14px;
+  padding: 2px 0 3px;
+}
+
+#ranking-screen.final-mode .final-empty-card {
+  visibility: hidden;
+  padding: 6px;
+  border: 3px solid transparent;
+  border-radius: 13px;
+}
+
+#ranking-screen.final-mode .final-empty-card::before {
+  content: "";
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+}
+
+#ranking-screen.final-mode .final-empty-card::after {
+  content: "";
+  display: block;
+  height: 20px;
+}
+
 
 /* =========================
    スマホ
@@ -337,39 +444,39 @@ body {
   .container {
     width: 100%;
     max-width: 100%;
-    padding: 8px 8px 10px;
+    padding: 5px 6px 8px;
   }
+
 
   /* =========================
      スタート画面
   ========================= */
 
   #start-screen {
-    min-height: calc(100vh - 18px);
-    padding: 10px 5px;
+    min-height: calc(100vh - 10px);
+    padding: 8px 5px;
   }
 
   #start-screen h1 {
-    font-size: 27px;
+    font-size: 30px;
     margin-bottom: 18px;
-    letter-spacing: 1px;
   }
 
   #start-screen h1::after {
-    width: 32px;
-    height: 3px;
+    width: 40px;
+    height: 5px;
     margin-top: 7px;
   }
 
   .description {
-    font-size: 15px;
+    font-size: 14px;
     line-height: 1.65;
-    margin-bottom: 16px;
+    margin-bottom: 15px;
   }
 
   .notes {
     font-size: 11px;
-    margin-bottom: 20px;
+    margin-bottom: 19px;
   }
 
   .notes p {
@@ -379,29 +486,32 @@ body {
   #start-button {
     padding: 12px 45px;
     font-size: 15px;
+    border-width: 2px;
+    box-shadow: 4px 4px 0 #222;
   }
+
 
   /* =========================
      ランキング画面
   ========================= */
 
   #ranking-screen h1 {
-    font-size: 20px;
-    margin-bottom: 8px;
-    letter-spacing: 0.5px;
+    font-size: 23px;
+    margin-bottom: 6px;
   }
 
   #ranking-screen h1::after {
-    width: 28px;
-    height: 3px;
-    margin-top: 5px;
+    font-size: 14px;
+    margin-top: 2px;
   }
 
   #instruction {
-    font-size: 11px;
+    font-size: 10px;
     padding: 5px 10px;
-    margin-bottom: 8px;
+    margin-bottom: 6px;
+    border-width: 1px;
   }
+
 
   /* =========================
      メンバーエリア
@@ -409,80 +519,107 @@ body {
 
   #member-area {
     grid-template-columns: repeat(2, 1fr);
-    gap: 6px;
+    gap: 5px;
   }
 
-  /* 4人表示 */
   .member-card {
-    padding: 4px;
-    border-radius: 10px;
+    padding: 3px;
     border-width: 2px;
+    border-radius: 9px;
+    box-shadow: 3px 3px 0 #222;
+  }
+
+  .member-card:hover {
+    transform: none;
+    box-shadow: 3px 3px 0 #b8ff00;
+  }
+
+  .member-card.selected {
+    transform: translate(-1px, -1px);
+    box-shadow: 4px 4px 0 #b8ff00;
   }
 
   .member-image {
     aspect-ratio: 1 / 1;
-    border-radius: 7px;
-    margin-bottom: 2px;
-  }
-
-  .member-name {
-    font-size: 12px;
-    padding: 1px 0 2px;
-  }
-
-  .member-card.selected::after {
-    width: 20px;
-    height: 20px;
-    top: 4px;
-    right: 4px;
-    font-size: 11px;
-  }
-
-  #next-button {
-    margin-top: 7px;
-    padding: 8px 28px;
-    font-size: 13px;
-  }
-
-  /* =========================
-     9人以上の選抜画面
-     3列にして高さを圧縮
-  ========================= */
-
-  #member-area:has(.member-card:nth-child(9)) {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 5px;
-  }
-
-  #member-area:has(.member-card:nth-child(9)) .member-card {
-    padding: 3px;
-    border-radius: 8px;
-    border-width: 2px;
-  }
-
-  #member-area:has(.member-card:nth-child(9)) .member-image {
     border-radius: 6px;
     margin-bottom: 1px;
   }
 
-  #member-area:has(.member-card:nth-child(9)) .member-name {
-    font-size: 10px;
+  .member-name {
+    font-size: 11px;
     padding: 1px 0 2px;
   }
 
-  #member-area:has(.member-card:nth-child(9)) .member-card.selected::after {
-    width: 17px;
-    height: 17px;
+  .member-card.selected::after {
+    width: 18px;
+    height: 18px;
     top: 3px;
     right: 3px;
+    font-size: 10px;
+    border-width: 1px;
+    box-shadow: 1px 1px 0 #222;
+  }
+
+
+  /* =========================
+     次へボタン
+  ========================= */
+
+  #next-button {
+    margin-top: 6px;
+    padding: 7px 25px;
+    font-size: 12px;
+    border-width: 2px;
+    box-shadow: 3px 3px 0 #b8ff00;
+  }
+
+
+  /* =========================
+     9人以上の選抜画面
+     3列
+  ========================= */
+
+  #member-area:has(.member-card:nth-child(9)) {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4px;
+  }
+
+  #member-area:has(.member-card:nth-child(9)) .member-card {
+    padding: 2px;
+    border-radius: 7px;
+    border-width: 2px;
+    box-shadow: 2px 2px 0 #222;
+  }
+
+  #member-area:has(.member-card:nth-child(9)) .member-image {
+    border-radius: 5px;
+    margin-bottom: 0;
+  }
+
+  #member-area:has(.member-card:nth-child(9)) .member-name {
     font-size: 9px;
+    line-height: 1.1;
+    padding: 1px 0;
+  }
+
+  #member-area:has(.member-card:nth-child(9)) .member-card.selected {
+    box-shadow: 3px 3px 0 #b8ff00;
+  }
+
+  #member-area:has(.member-card:nth-child(9)) .member-card.selected::after {
+    width: 15px;
+    height: 15px;
+    top: 2px;
+    right: 2px;
+    font-size: 8px;
   }
 
   #member-area:has(.member-card:nth-child(9)) + #next-button {
-    margin-top: 5px;
-    padding: 7px 25px;
-    font-size: 12px;
+    margin-top: 4px;
+    padding: 6px 22px;
+    font-size: 11px;
   }
+
 
   /* =========================
      最終ランキング
@@ -493,6 +630,7 @@ body {
     padding: 5px;
     margin-bottom: 5px;
     border-width: 2px;
+    box-shadow: 3px 3px 0 #222;
   }
 
   .rank-number {
@@ -512,32 +650,54 @@ body {
     font-size: 11px;
     padding: 1px 0 2px;
   }
-}
-/* =========================
-   最終順位選択中
-   ========================= */
 
-@media (max-width: 600px) {
 
-#ranking-screen.final-mode #member-area {
-  grid-template-columns: repeat(4, 1fr);
-  gap: 4px;
-}
+  /* =========================
+     最終順位選択中
+     3列 × 3段固定
+  ========================= */
+
+  #ranking-screen.final-mode #member-area {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 4px !important;
+    max-width: 100%;
+  }
 
   #ranking-screen.final-mode .member-card {
-    padding: 3px;
-    border-radius: 8px;
+    padding: 2px;
+    border-radius: 7px;
     border-width: 2px;
+    box-shadow: 2px 2px 0 #222;
   }
 
   #ranking-screen.final-mode .member-image {
-    border-radius: 6px;
-    margin-bottom: 1px;
+    border-radius: 5px;
+    margin-bottom: 0;
   }
 
   #ranking-screen.final-mode .member-name {
-    font-size: 10px;
-    padding: 1px 0 2px;
+    font-size: 9px;
+    line-height: 1.1;
+    padding: 1px 0;
   }
 
+  #ranking-screen.final-mode .final-empty-card {
+    visibility: hidden;
+    padding: 2px;
+    border: 2px solid transparent;
+    border-radius: 7px;
+  }
+
+  #ranking-screen.final-mode .final-empty-card::before {
+    content: "";
+    display: block;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+  }
+
+  #ranking-screen.final-mode .final-empty-card::after {
+    content: "";
+    display: block;
+    height: 12px;
+  }
 }

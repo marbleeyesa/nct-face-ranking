@@ -1,45 +1,11 @@
 // NCT好き顔ランキング
 
-
-// ================================
-// NCTメンバー
-// ================================
-
 const members = [
-  "ジャニ",
-  "テヨン",
-  "ユウタ",
-  "クン",
-  "ドヨン",
-  "テン",
-  "ジェヒョン",
-  "ウィンウィン",
-  "ジョンウ",
-  "ルーカス",
-  "マーク",
-  "シャオジュン",
-  "ヘンドリー",
-  "ロンジュン",
-  "ジェノ",
-  "ヘチャン",
-  "ジェミン",
-  "ヤンヤン",
-  "ショウタロウ",
-  "ソンチャン",
-  "チョンロ",
-  "チソン",
-  "シオン",
-  "リク",
-  "ユウシ",
-  "ジェヒ",
-  "リョウ",
-  "サクヤ"
+  "ジャニ","テヨン","ユウタ","クン","ドヨン","テン","ジェヒョン","ウィンウィン",
+  "ジョンウ","ルーカス","マーク","シャオジュン","ヘンドリー","ロンジュン","ジェノ",
+  "ヘチャン","ジェミン","ヤンヤン","ショウタロウ","ソンチャン","チョンロ","チソン",
+  "シオン","リク","ユウシ","ジェヒ","リョウ","サクヤ"
 ];
-
-
-// ================================
-// 画像ファイル名
-// ================================
 
 const imageNames = {
   "ジャニ": "johnny.jpg",
@@ -73,186 +39,221 @@ const imageNames = {
 };
 
 
-// ================================
-// HTML
-// ================================
+/* =========================
+   HTML要素
+========================= */
 
-const startScreen = document.getElementById("start-screen");
-const rankingScreen = document.getElementById("ranking-screen");
-const startButton = document.getElementById("start-button");
-const memberArea = document.getElementById("member-area");
-const nextButton = document.getElementById("next-button");
-const instruction = document.getElementById("instruction");
+const startScreen =
+  document.getElementById("start-screen");
+
+const rankingScreen =
+  document.getElementById("ranking-screen");
+
+const startButton =
+  document.getElementById("start-button");
+
+const memberArea =
+  document.getElementById("member-area");
+
+const nextButton =
+  document.getElementById("next-button");
+
+const instruction =
+  document.getElementById("instruction");
 
 
-// ================================
-// ゲームの状態
-// ================================
+/* =========================
+   ゲーム状態
+========================= */
 
 let currentRound = 1;
 let currentMembers = [];
 let currentGroup = 0;
 let groupSelections = [];
 let finalists = [];
-
-
-// ================================
-// ROUND1で選ばれたメンバー
-// ================================
-
 let round1Members = [];
-
-
-// ================================
-// 最終ランキング
-// ================================
-
-// 1位〜9位まで、決定した順番で保存
 let finalRanking = [];
-
-// 現在何位を選んでいるか
-// 0 = 1位、1 = 2位……
 let currentRankPosition = 0;
-
-
-// ================================
-// 戻る履歴
-// ================================
-
 let history = [];
-
-
-// ================================
-// 現在の画面
-// ================================
-
 let currentScreen = "";
 
 
-// ================================
-// 戻るボタン
-// ================================
+/* =========================
+   戻るボタン
+========================= */
 
-const backButton = document.createElement("button");
+const backButton =
+  document.createElement("button");
 
-backButton.textContent = "← ひとつ前にもどる";
+backButton.textContent =
+  "← ひとつ前にもどる";
 
-backButton.style.marginTop = "15px";
-backButton.style.padding = "12px 30px";
-backButton.style.border = "1px solid #333";
-backButton.style.borderRadius = "30px";
-backButton.style.background = "#fff";
-backButton.style.color = "#333";
-backButton.style.fontSize = "14px";
-backButton.style.cursor = "pointer";
-backButton.style.display = "none";
+backButton.style.display =
+  "none";
 
-rankingScreen.appendChild(backButton);
+backButton.style.marginTop =
+  "15px";
+
+backButton.style.padding =
+  "12px 30px";
+
+backButton.style.border =
+  "1px solid #333";
+
+backButton.style.borderRadius =
+  "30px";
+
+backButton.style.background =
+  "#fff";
+
+backButton.style.color =
+  "#333";
+
+backButton.style.fontSize =
+  "14px";
+
+backButton.style.cursor =
+  "pointer";
+
+rankingScreen.appendChild(
+  backButton
+);
 
 
-// ================================
-// スタート
-// ================================
+/* =========================
+   初期状態
+========================= */
 
-startButton.addEventListener("click", function () {
+startScreen.style.display =
+  "flex";
 
-  startGame();
+rankingScreen.style.display =
+  "none";
 
-});
+
+/* =========================
+   スタート
+========================= */
+
+startButton.addEventListener(
+  "click",
+  function () {
+    startGame();
+  }
+);
 
 
-// ================================
-// ゲーム開始
-// ================================
+/* =========================
+   ゲーム開始
+========================= */
 
 function startGame() {
 
+  rankingScreen.classList.remove(
+    "final-mode"
+  );
+
+  startScreen.style.display =
+    "none";
+
+  rankingScreen.style.display =
+    "block";
+
+
   currentRound = 1;
-
   currentMembers = [];
-
   currentGroup = 0;
-
   groupSelections = [];
-
   finalists = [];
-
   round1Members = [];
-
   finalRanking = [];
-
   currentRankPosition = 0;
-
   history = [];
-
   currentScreen = "";
 
-  startScreen.style.display = "none";
-
-  rankingScreen.style.display = "block";
 
   startRound(members);
 }
 
 
-// ================================
-// シャッフル
-// ================================
+/* =========================
+   シャッフル
+========================= */
 
 function shuffle(array) {
 
-  const newArray = [...array];
+  const newArray =
+    [...array];
 
-  for (let i = newArray.length - 1; i > 0; i--) {
+  for (
+    let i = newArray.length - 1;
+    i > 0;
+    i--
+  ) {
 
-    const j = Math.floor(Math.random() * (i + 1));
+    const j =
+      Math.floor(
+        Math.random() * (i + 1)
+      );
 
-    const temp = newArray[i];
+    const temp =
+      newArray[i];
 
-    newArray[i] = newArray[j];
+    newArray[i] =
+      newArray[j];
 
-    newArray[j] = temp;
-
+    newArray[j] =
+      temp;
   }
 
   return newArray;
 }
 
 
-// ================================
-// ROUND開始
-// ================================
+/* =========================
+   ROUND開始
+========================= */
 
 function startRound(memberList) {
 
-  currentMembers = shuffle(memberList);
+  currentMembers =
+    shuffle(memberList);
 
   currentGroup = 0;
 
   groupSelections = [];
 
   showGroup();
-
 }
 
 
-// ================================
-// 4人表示
-// ================================
+/* =========================
+   4人表示
+========================= */
 
 function showGroup() {
 
-  currentScreen = "group";
+  currentScreen =
+    "group";
 
-  nextButton.onclick = null;
+  nextButton.onclick =
+    null;
 
-  memberArea.innerHTML = "";
+  memberArea.innerHTML =
+    "";
 
-  const start = currentGroup * 4;
 
-  const end = start + 4;
+  const start =
+    currentGroup * 4;
 
-  const group = currentMembers.slice(start, end);
+  const end =
+    start + 4;
+
+  const group =
+    currentMembers.slice(
+      start,
+      end
+    );
 
 
   instruction.textContent =
@@ -261,71 +262,86 @@ function showGroup() {
     "　好きなメンバーを選んでね♡";
 
 
-  group.forEach(function (member) {
+  group.forEach(
+    function (member) {
+      createMemberCard(member);
+    }
+  );
 
-    createMemberCard(member);
 
-  });
-
-
-  // 前に選んだ人を復元
   const previousSelection =
-    groupSelections[currentGroup] || [];
+    groupSelections[currentGroup] ||
+    [];
 
 
   const cards =
-    document.querySelectorAll(".member-card");
+    document.querySelectorAll(
+      ".member-card"
+    );
 
 
-  cards.forEach(function (card) {
+  cards.forEach(
+    function (card) {
 
-    const name =
-      card.querySelector(".member-name").textContent;
+      const name =
+        card.querySelector(
+          ".member-name"
+        ).textContent;
 
+      if (
+        previousSelection.includes(
+          name
+        )
+      ) {
 
-    if (previousSelection.includes(name)) {
-
-      card.classList.add("selected");
+        card.classList.add(
+          "selected"
+        );
+      }
 
     }
-
-  });
-
-
-  nextButton.style.display = "inline-block";
-
-  nextButton.textContent = "次へ";
-
-  nextButton.dataset.special = "false";
+  );
 
 
-  if (currentGroup > 0 || history.length > 0) {
+  nextButton.style.display =
+    "block";
 
-    backButton.style.display = "inline-block";
+  nextButton.textContent =
+    "次へ";
+
+  nextButton.dataset.special =
+    "false";
+
+
+  if (
+    currentGroup > 0 ||
+    history.length > 0
+  ) {
+
+    backButton.style.display =
+      "block";
 
   } else {
 
-    backButton.style.display = "none";
-
+    backButton.style.display =
+      "none";
   }
 }
 
 
-// ================================
-// メンバーカード
-// ================================
+/* =========================
+   メンバーカード
+========================= */
 
 function createMemberCard(member) {
 
   const card =
     document.createElement("div");
 
-
   card.className =
     "member-card";
 
 
-  // 画像
   const image =
     document.createElement("img");
 
@@ -333,20 +349,20 @@ function createMemberCard(member) {
     "member-image";
 
   image.src =
-    `images/${imageNames[member]}`;
+    "images/" +
+    imageNames[member];
 
   image.alt =
     member;
 
+
   image.onerror =
     function () {
-
-      image.style.display = "none";
-
+      image.style.display =
+        "none";
     };
 
 
-  // 名前
   const name =
     document.createElement("div");
 
@@ -358,24 +374,28 @@ function createMemberCard(member) {
 
 
   card.appendChild(image);
-
   card.appendChild(name);
 
 
-  card.addEventListener("click", function () {
+  card.addEventListener(
+    "click",
+    function () {
 
-    card.classList.toggle("selected");
+      card.classList.toggle(
+        "selected"
+      );
 
-  });
+    }
+  );
 
 
   memberArea.appendChild(card);
 }
 
 
-// ================================
-// 現在の選択を保存
-// ================================
+/* =========================
+   現在の選択を保存
+========================= */
 
 function saveCurrentGroupSelection() {
 
@@ -383,18 +403,23 @@ function saveCurrentGroupSelection() {
 
 
   const cards =
-    document.querySelectorAll(".member-card.selected");
+    document.querySelectorAll(
+      ".member-card.selected"
+    );
 
 
-  cards.forEach(function (card) {
+  cards.forEach(
+    function (card) {
 
-    const name =
-      card.querySelector(".member-name").textContent;
+      const name =
+        card.querySelector(
+          ".member-name"
+        ).textContent;
 
+      selected.push(name);
 
-    selected.push(name);
-
-  });
+    }
+  );
 
 
   groupSelections[currentGroup] =
@@ -402,78 +427,85 @@ function saveCurrentGroupSelection() {
 }
 
 
-// ================================
-// ROUND全体の選択
-// ================================
+/* =========================
+   全選択取得
+========================= */
 
 function getAllGroupSelections() {
 
   let selected = [];
 
 
-  groupSelections.forEach(function (group) {
+  groupSelections.forEach(
+    function (group) {
 
-    if (group) {
+      if (group) {
 
-      selected =
-        selected.concat(group);
+        selected =
+          selected.concat(group);
+
+      }
 
     }
-
-  });
+  );
 
 
   return selected;
 }
 
 
-// ================================
-// 状態を保存
-// ================================
+/* =========================
+   履歴保存
+========================= */
 
 function saveHistory() {
 
   history.push({
 
-    screen: currentScreen,
+    screen:
+      currentScreen,
 
-    round: currentRound,
+    round:
+      currentRound,
 
-    members: [...currentMembers],
+    members:
+      [...currentMembers],
 
-    group: currentGroup,
+    group:
+      currentGroup,
 
     selections:
-      groupSelections.map(function (group) {
+      groupSelections.map(
+        function (group) {
 
-        if (group) {
+          if (group) {
+            return [...group];
+          }
 
-          return [...group];
-
+          return group;
         }
+      ),
 
-        return group;
+    finalists:
+      [...finalists],
 
-      }),
-
-    finalists: [...finalists],
-
-    round1Members: [...round1Members]
+    round1Members:
+      [...round1Members]
 
   });
 }
 
 
-// ================================
-// 状態を復元
-// ================================
+/* =========================
+   履歴復元
+========================= */
 
 function restoreHistory() {
 
-  if (history.length === 0) {
-
+  if (
+    history.length === 0
+  ) {
     return;
-
   }
 
 
@@ -484,119 +516,121 @@ function restoreHistory() {
   currentRound =
     state.round;
 
-
   currentMembers =
     [...state.members];
-
 
   currentGroup =
     state.group;
 
 
   groupSelections =
-    state.selections.map(function (group) {
+    state.selections.map(
+      function (group) {
 
-      if (group) {
+        if (group) {
+          return [...group];
+        }
 
-        return [...group];
-
+        return group;
       }
-
-      return group;
-
-    });
+    );
 
 
   finalists =
     [...state.finalists];
 
-
   round1Members =
     [...state.round1Members];
 
 
-  if (state.screen === "group") {
+  if (
+    state.screen ===
+    "group"
+  ) {
 
     showGroup();
 
     return;
-
   }
 
 
-  if (state.screen === "roundEnd") {
+  if (
+    state.screen ===
+    "roundEnd"
+  ) {
 
     showRoundEnd();
 
     return;
-
   }
-
 }
 
 
-// ================================
-// 次へ
-// ================================
+/* =========================
+   次へ
+========================= */
 
-nextButton.addEventListener("click", function () {
-
-  if (
-    nextButton.dataset.special === "true"
-  ) {
-
-    return;
-
-  }
-
-
-  // 4人選択
-  if (currentScreen === "group") {
-
-    saveCurrentGroupSelection();
-
-
-    const totalGroups =
-      Math.ceil(
-        currentMembers.length / 4
-      );
-
-
-    currentGroup++;
-
+nextButton.addEventListener(
+  "click",
+  function () {
 
     if (
-      currentGroup < totalGroups
+      nextButton.dataset.special ===
+      "true"
     ) {
-
-      showGroup();
-
-    } else {
-
-      finishRound();
-
+      return;
     }
 
 
-    return;
+    if (
+      currentScreen ===
+      "group"
+    ) {
+
+      saveCurrentGroupSelection();
+
+
+      const totalGroups =
+        Math.ceil(
+          currentMembers.length / 4
+        );
+
+
+      currentGroup++;
+
+
+      if (
+        currentGroup <
+        totalGroups
+      ) {
+
+        showGroup();
+
+      } else {
+
+        finishRound();
+      }
+
+
+      return;
+    }
+
+
+    if (
+      currentScreen ===
+      "roundEnd"
+    ) {
+
+      goToNextStage();
+    }
+
   }
+);
 
 
-  // ROUND終了
-  if (
-    currentScreen === "roundEnd"
-  ) {
-
-    goToNextStage();
-
-  }
-
-});
-
-
-// ================================
-// ROUND終了
-// ================================
+/* =========================
+   ROUND終了
+========================= */
 
 function finishRound() {
 
@@ -612,33 +646,32 @@ function finishRound() {
     finalists.length;
 
 
-  // ROUND1の場合
-  if (currentRound === 1) {
+  if (
+    currentRound === 1
+  ) {
 
-    // ROUND1で選んだメンバーを保存
     round1Members =
       [...finalists];
 
 
-    // 8人以下なら最初から
-    if (count <= 8) {
+    if (
+      count <= 8
+    ) {
 
       showRestartMessage();
 
       return;
-
     }
-
   }
 
 
-  // 0人
-  if (count === 0) {
+  if (
+    count === 0
+  ) {
 
     showRestartMessage();
 
     return;
-
   }
 
 
@@ -646,9 +679,9 @@ function finishRound() {
 }
 
 
-// ================================
-// ROUND終了画面
-// ================================
+/* =========================
+   ROUND終了画面
+========================= */
 
 function showRoundEnd() {
 
@@ -656,7 +689,8 @@ function showRoundEnd() {
     "roundEnd";
 
 
-  memberArea.innerHTML = "";
+  memberArea.innerHTML =
+    "";
 
 
   instruction.textContent =
@@ -669,38 +703,34 @@ function showRoundEnd() {
     document.createElement("p");
 
 
-  message.style.fontSize =
-    "20px";
-
-
   message.textContent =
     finalists.length +
     "人が次へ進みます！";
 
 
-  memberArea.appendChild(message);
+  memberArea.appendChild(
+    message
+  );
 
 
   nextButton.style.display =
-    "inline-block";
-
+    "block";
 
   nextButton.textContent =
     "次へ";
-
 
   nextButton.dataset.special =
     "false";
 
 
   backButton.style.display =
-    "inline-block";
+    "block";
 }
 
 
-// ================================
-// ROUND1で8人以下
-// ================================
+/* =========================
+   8人以下
+========================= */
 
 function showRestartMessage() {
 
@@ -708,7 +738,8 @@ function showRestartMessage() {
     "restart";
 
 
-  memberArea.innerHTML = "";
+  memberArea.innerHTML =
+    "";
 
 
   instruction.textContent =
@@ -719,24 +750,20 @@ function showRestartMessage() {
     document.createElement("p");
 
 
-  message.style.fontSize =
-    "20px";
-
-
   message.textContent =
     "8人以下になったため、最初からやり直します。";
 
 
-  memberArea.appendChild(message);
+  memberArea.appendChild(
+    message
+  );
 
 
   nextButton.style.display =
-    "inline-block";
-
+    "block";
 
   nextButton.textContent =
     "最初からやり直す";
-
 
   nextButton.dataset.special =
     "true";
@@ -748,16 +775,14 @@ function showRestartMessage() {
 
   nextButton.onclick =
     function () {
-
       startGame();
-
     };
 }
 
 
-// ================================
-// 次の段階へ
-// ================================
+/* =========================
+   次のステージ
+========================= */
 
 function goToNextStage() {
 
@@ -768,17 +793,16 @@ function goToNextStage() {
     finalists.length;
 
 
-  // 9人
-  if (count === 9) {
+  if (
+    count === 9
+  ) {
 
     startFinalRanking();
 
     return;
-
   }
 
 
-  // 10〜15人
   if (
     count >= 10 &&
     count <= 15
@@ -787,37 +811,35 @@ function goToNextStage() {
     startNineSelection();
 
     return;
-
   }
 
 
-  // 16人以上
-  if (count >= 16) {
+  if (
+    count >= 16
+  ) {
 
     currentRound++;
 
     startRound(finalists);
 
     return;
-
   }
 
 
-  // 8人以下
-  if (count <= 8) {
+  if (
+    count <= 8
+  ) {
 
     startAdditionalSelection();
 
     return;
-
   }
-
 }
 
 
-// ================================
-// 10〜15人から9人
-// ================================
+/* =========================
+   10〜15人 → 9人
+========================= */
 
 function startNineSelection() {
 
@@ -829,7 +851,8 @@ function startNineSelection() {
     shuffle(finalists);
 
 
-  memberArea.innerHTML = "";
+  memberArea.innerHTML =
+    "";
 
 
   instruction.textContent =
@@ -840,27 +863,23 @@ function startNineSelection() {
 
   currentMembers.forEach(
     function (member) {
-
       createMemberCard(member);
-
     }
   );
 
 
   nextButton.style.display =
-    "inline-block";
-
+    "block";
 
   nextButton.textContent =
     "9人を決定";
-
 
   nextButton.dataset.special =
     "true";
 
 
   backButton.style.display =
-    "inline-block";
+    "block";
 
 
   nextButton.onclick =
@@ -870,17 +889,17 @@ function startNineSelection() {
         getSelectedMembers();
 
 
-      if (selected.length !== 9) {
+      if (
+        selected.length !== 9
+      ) {
 
         alert(
-          "9人選んでください！\n" +
-          "現在 " +
+          "9人選んでください！\n現在 " +
           selected.length +
           "人選択しています。"
         );
 
         return;
-
       }
 
 
@@ -889,14 +908,13 @@ function startNineSelection() {
 
 
       startFinalRanking();
-
     };
 }
 
 
-// ================================
-// 8人以下 → 9人
-// ================================
+/* =========================
+   追加選択
+========================= */
 
 function startAdditionalSelection() {
 
@@ -908,13 +926,13 @@ function startAdditionalSelection() {
     9 - finalists.length;
 
 
-  // ROUND1で選ばれたメンバーだけを
-  // 追加候補にする
   const candidates =
     round1Members.filter(
       function (member) {
 
-        return !finalists.includes(member);
+        return !finalists.includes(
+          member
+        );
 
       }
     );
@@ -924,7 +942,8 @@ function startAdditionalSelection() {
     shuffle(candidates);
 
 
-  memberArea.innerHTML = "";
+  memberArea.innerHTML =
+    "";
 
 
   instruction.textContent =
@@ -935,27 +954,23 @@ function startAdditionalSelection() {
 
   currentMembers.forEach(
     function (member) {
-
       createMemberCard(member);
-
     }
   );
 
 
   nextButton.style.display =
-    "inline-block";
-
+    "block";
 
   nextButton.textContent =
     "決定";
-
 
   nextButton.dataset.special =
     "true";
 
 
   backButton.style.display =
-    "inline-block";
+    "block";
 
 
   nextButton.onclick =
@@ -972,30 +987,29 @@ function startAdditionalSelection() {
         alert(
           "あと" +
           need +
-          "人選んでください！\n" +
-          "現在 " +
+          "人選んでください！\n現在 " +
           selected.length +
           "人選択しています。"
         );
 
         return;
-
       }
 
 
       finalists =
-        finalists.concat(selected);
+        finalists.concat(
+          selected
+        );
 
 
       startFinalRanking();
-
     };
 }
 
 
-// ================================
-// 選択メンバー取得
-// ================================
+/* =========================
+   選択中メンバー取得
+========================= */
 
 function getSelectedMembers() {
 
@@ -1016,7 +1030,6 @@ function getSelectedMembers() {
           ".member-name"
         ).textContent;
 
-
       selected.push(name);
 
     }
@@ -1027,42 +1040,44 @@ function getSelectedMembers() {
 }
 
 
-// ================================
-// 最終ランキング開始
-// ================================
+/* =========================
+   最終順位開始
+========================= */
 
 function startFinalRanking() {
 
-  finalists =
-    finalists.slice(0, 9);
+  currentScreen =
+    "finalSelection";
 
 
-  // 順位をリセット
   finalRanking = [];
 
   currentRankPosition = 0;
-
-
-  currentScreen =
-    "finalSelection";
 
 
   showRankSelection();
 }
 
 
-// ================================
-// 1位〜9位を選択
-// ================================
+/* =========================
+   最終順位選択
+========================= */
 
 function showRankSelection() {
 
-  rankingScreen.classList.add("final-mode");
+  currentScreen =
+    "finalSelection";
 
-  memberArea.innerHTML = "";
+
+  rankingScreen.classList.add(
+    "final-mode"
+  );
 
 
-  // 9位まで決まったら結果表示
+  memberArea.innerHTML =
+    "";
+
+
   if (
     currentRankPosition >= 9
   ) {
@@ -1070,7 +1085,6 @@ function showRankSelection() {
     showFinalRanking();
 
     return;
-
   }
 
 
@@ -1083,55 +1097,68 @@ function showRankSelection() {
     "位を選んでね♡";
 
 
-  // まだ順位が決まっていないメンバーだけ表示
   const remainingMembers =
     finalists.filter(
       function (member) {
 
-        return !finalRanking.includes(member);
+        return !finalRanking.includes(
+          member
+        );
 
       }
     );
 
 
-  remainingMembers.forEach(
-    function (member) {
+  for (
+    let i = 0;
+    i < 9;
+    i++
+  ) {
 
-      createRankCard(member);
+    if (
+      i < remainingMembers.length
+    ) {
 
+      createRankCard(
+        remainingMembers[i]
+      );
+
+    } else {
+
+      const emptyCard =
+        document.createElement("div");
+
+      emptyCard.className =
+        "final-empty-card";
+
+      memberArea.appendChild(
+        emptyCard
+      );
     }
-  );
+  }
 
 
-  // 次へボタンは使わない
-  // メンバーを押した瞬間に順位決定
   nextButton.style.display =
     "none";
 
-
-  // 1位のときは、
-  // 「9人決定前」の画面へ戻れる
-  // 2位以降は、ひとつ前の順位へ戻れる
   backButton.style.display =
-    "inline-block";
+    "block";
 }
 
 
-// ================================
-// 順位選択カード
-// ================================
+/* =========================
+   最終順位カード
+========================= */
 
 function createRankCard(member) {
 
   const card =
     document.createElement("div");
 
-
   card.className =
     "member-card";
 
 
-  // 画像
   const image =
     document.createElement("img");
 
@@ -1139,20 +1166,20 @@ function createRankCard(member) {
     "member-image";
 
   image.src =
-    `images/${imageNames[member]}`;
+    "images/" +
+    imageNames[member];
 
   image.alt =
     member;
 
+
   image.onerror =
     function () {
-
-      image.style.display = "none";
-
+      image.style.display =
+        "none";
     };
 
 
-  // 名前
   const name =
     document.createElement("div");
 
@@ -1164,7 +1191,6 @@ function createRankCard(member) {
 
 
   card.appendChild(image);
-
   card.appendChild(name);
 
 
@@ -1172,37 +1198,38 @@ function createRankCard(member) {
     "click",
     function () {
 
-      // すでに選ばれていたら何もしない
       if (
-        finalRanking.includes(member)
+        finalRanking.includes(
+          member
+        )
       ) {
-
         return;
-
       }
 
 
-      // 現在の順位に追加
-      finalRanking.push(member);
+      finalRanking.push(
+        member
+      );
 
 
       currentRankPosition++;
 
 
-      // 次の順位へ
       showRankSelection();
 
     }
   );
 
 
-  memberArea.appendChild(card);
+  memberArea.appendChild(
+    card
+  );
 }
 
 
-// ================================
-// 最終ランキング表示
-// ================================
+/* =========================
+   最終結果
+========================= */
 
 function showFinalRanking() {
 
@@ -1210,7 +1237,8 @@ function showFinalRanking() {
     "final";
 
 
-  memberArea.innerHTML = "";
+  memberArea.innerHTML =
+    "";
 
 
   instruction.textContent =
@@ -1223,30 +1251,25 @@ function showFinalRanking() {
       const card =
         document.createElement("div");
 
-
       card.className =
         "member-card";
 
 
-      // 順位
+      /* 順位 */
+
       const rank =
         document.createElement("div");
 
-
-      rank.style.fontSize =
-        "28px";
-
-
-      rank.style.fontWeight =
-        "bold";
-
+      rank.className =
+        "final-rank";
 
       rank.textContent =
         (index + 1) +
         "位";
 
 
-      // 画像
+      /* 写真 */
+
       const image =
         document.createElement("img");
 
@@ -1254,56 +1277,50 @@ function showFinalRanking() {
         "member-image";
 
       image.src =
-        `images/${imageNames[member]}`;
+        "images/" +
+        imageNames[member];
 
       image.alt =
         member;
 
+
       image.onerror =
         function () {
-
-          image.style.display = "none";
-
+          image.style.display =
+            "none";
         };
 
 
-      // 名前
+      /* 名前 */
+
       const name =
         document.createElement("div");
 
-
       name.className =
         "member-name";
-
-
-      name.style.marginTop =
-        "10px";
-
 
       name.textContent =
         member;
 
 
       card.appendChild(rank);
-
       card.appendChild(image);
-
       card.appendChild(name);
 
 
-      memberArea.appendChild(card);
+      memberArea.appendChild(
+        card
+      );
 
     }
   );
 
 
   nextButton.style.display =
-    "inline-block";
-
+    "block";
 
   nextButton.textContent =
     "もう一度最初から選ぶ";
-
 
   nextButton.dataset.special =
     "true";
@@ -1313,41 +1330,29 @@ function showFinalRanking() {
     "none";
 
 
-  // ================================
-  // トップ画面へ戻る
-  // ================================
-
   nextButton.onclick =
     function () {
 
-      // 全リセット
       currentRound = 1;
-
       currentMembers = [];
-
       currentGroup = 0;
-
       groupSelections = [];
-
       finalists = [];
-
       round1Members = [];
-
       finalRanking = [];
-
       currentRankPosition = 0;
-
       history = [];
-
       currentScreen = "";
 
 
-      // ランキング画面を隠す
+      rankingScreen.classList.remove(
+        "final-mode"
+      );
+
+
       rankingScreen.style.display =
         "none";
 
-
-      // スタート画面を表示
       startScreen.style.display =
         "flex";
 
@@ -1355,38 +1360,35 @@ function showFinalRanking() {
 }
 
 
-// ================================
-// ひとつ前にもどる
-// ================================
+/* =========================
+   戻るボタン
+========================= */
 
 backButton.addEventListener(
   "click",
   function () {
 
-    // -------------------------------
-    // 最終ランキング選択中
-    // -------------------------------
+    /* 最終順位選択 */
 
     if (
       currentScreen ===
       "finalSelection"
     ) {
 
-      // 1位選択中
-      // → 9人決定前の画面へ戻る
       if (
         currentRankPosition === 0
       ) {
 
+        rankingScreen.classList.remove(
+          "final-mode"
+        );
+
         restoreHistory();
 
         return;
-
       }
 
 
-      // 2位以降
-      // → ひとつ前の順位を取り消す
       const previousRankIndex =
         currentRankPosition - 1;
 
@@ -1403,15 +1405,11 @@ backButton.addEventListener(
 
       showRankSelection();
 
-
       return;
-
     }
 
 
-    // -------------------------------
-    // 9人選択
-    // -------------------------------
+    /* 9人選択 */
 
     if (
       currentScreen ===
@@ -1421,13 +1419,10 @@ backButton.addEventListener(
       restoreHistory();
 
       return;
-
     }
 
 
-    // -------------------------------
-    // 追加選択
-    // -------------------------------
+    /* 追加選択 */
 
     if (
       currentScreen ===
@@ -1437,21 +1432,19 @@ backButton.addEventListener(
       restoreHistory();
 
       return;
-
     }
 
 
-    // -------------------------------
-    // 4人選択
-    // -------------------------------
+    /* 通常の4人選択 */
 
     if (
       currentScreen ===
       "group"
     ) {
 
-      // 同じROUND内で前の4人へ
-      if (currentGroup > 0) {
+      if (
+        currentGroup > 0
+      ) {
 
         saveCurrentGroupSelection();
 
@@ -1460,26 +1453,21 @@ backButton.addEventListener(
         showGroup();
 
         return;
-
       }
 
 
-      // ROUNDの最初
-      // → 前のROUND終了画面へ
-      if (history.length > 0) {
+      if (
+        history.length > 0
+      ) {
 
         restoreHistory();
 
         return;
-
       }
-
     }
 
 
-    // -------------------------------
-    // ROUND終了画面
-    // -------------------------------
+    /* ROUND終了画面 */
 
     if (
       currentScreen ===
@@ -1498,9 +1486,7 @@ backButton.addEventListener(
 
       showGroup();
 
-
       return;
-
     }
 
   }

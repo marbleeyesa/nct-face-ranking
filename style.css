@@ -1,0 +1,424 @@
+* {
+  box-sizing: border-box;
+  }
+
+body {
+margin: 0;
+background: #f7f8f5;
+font-family: Arial, "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+color: #222;
+}
+
+.container {
+max-width: 900px;
+margin: 0 auto;
+padding: 40px 20px 60px;
+text-align: center;
+}
+
+/* =========================
+スタート画面
+========================= */
+
+#start-screen {
+min-height: 80vh;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+}
+
+#start-screen h1 {
+position: relative;
+display: inline-block;
+font-size: 42px;
+margin: 0 0 30px;
+letter-spacing: 2px;
+color: #222;
+font-weight: 800;
+}
+
+#start-screen h1::after {
+content: "";
+display: block;
+width: 55px;
+height: 5px;
+background: #b8ff00;
+border-radius: 999px;
+margin: 12px auto 0;
+}
+
+.description {
+font-size: 18px;
+line-height: 1.8;
+margin: 0 0 20px;
+}
+
+.notes {
+font-size: 14px;
+color: #777;
+line-height: 1.6;
+margin: 0 0 30px;
+}
+
+.notes p {
+margin: 5px 0;
+}
+
+/* =========================
+スタートボタン
+========================= */
+
+#start-button {
+display: inline-block;
+padding: 16px 70px;
+border: none;
+border-radius: 999px;
+background: #b8ff00;
+color: #111;
+font-size: 18px;
+font-weight: bold;
+cursor: pointer;
+box-shadow: 0 6px 0 #8dbf00;
+transition: 0.15s;
+}
+
+#start-button:hover {
+transform: translateY(-3px);
+box-shadow: 0 9px 0 #8dbf00;
+}
+
+#start-button:active {
+transform: translateY(3px);
+box-shadow: 0 3px 0 #8dbf00;
+}
+
+/* =========================
+ランキング画面
+========================= */
+
+#ranking-screen {
+display: none;
+}
+
+#ranking-screen h1 {
+position: relative;
+display: inline-block;
+margin: 0 0 25px;
+font-size: 32px;
+letter-spacing: 1px;
+font-weight: 800;
+}
+
+#ranking-screen h1::after {
+content: "";
+display: block;
+width: 42px;
+height: 4px;
+background: #b8ff00;
+border-radius: 999px;
+margin: 10px auto 0;
+}
+
+/* =========================
+説明
+========================= */
+
+#instruction {
+display: inline-block;
+margin: 0 0 30px;
+padding: 9px 20px;
+border-radius: 999px;
+background: #222;
+color: #fff;
+font-size: 16px;
+font-weight: bold;
+letter-spacing: 0.5px;
+}
+
+/* =========================
+メンバーエリア
+========================= */
+
+#member-area {
+display: grid;
+grid-template-columns: repeat(2, 1fr);
+gap: 20px;
+}
+
+/* =========================
+メンバーカード
+========================= */
+
+.member-card {
+position: relative;
+background: #fff;
+border-radius: 22px;
+padding: 15px;
+cursor: pointer;
+border: 3px solid transparent;
+box-shadow: 0 5px 18px rgba(0, 0, 0, 0.06);
+transition:
+transform 0.2s ease,
+border-color 0.2s ease,
+background 0.2s ease,
+box-shadow 0.2s ease;
+overflow: hidden;
+}
+
+.member-card:hover {
+transform: translateY(-4px);
+border-color: #dfff9c;
+box-shadow: 0 9px 24px rgba(0, 0, 0, 0.09);
+}
+
+/* 選択中 */
+
+.member-card.selected {
+border-color: #b8ff00;
+background: #f6ffdf;
+transform: translateY(-5px) scale(1.01);
+box-shadow: 0 10px 25px rgba(184, 255, 0, 0.25);
+}
+
+/* 選択した瞬間のアニメーション */
+
+.member-card.selected .member-image {
+transform: scale(1.03);
+}
+
+.member-card:active {
+transform: scale(0.98);
+}
+
+/* =========================
+メンバー画像
+========================= */
+
+.member-image {
+display: block;
+width: 100%;
+aspect-ratio: 1 / 1;
+object-fit: contain;
+border-radius: 16px;
+margin: 0 auto 15px;
+background: #f5f5f5;
+transition: transform 0.2s ease;
+}
+
+/* =========================
+メンバー名
+========================= */
+
+.member-name {
+font-size: 22px;
+font-weight: bold;
+padding: 5px 0 8px;
+}
+
+/* =========================
+選択チェック
+========================= */
+
+.member-card.selected::after {
+content: "✓";
+position: absolute;
+top: 12px;
+right: 14px;
+width: 32px;
+height: 32px;
+display: flex;
+align-items: center;
+justify-content: center;
+background: #b8ff00;
+color: #111;
+border-radius: 50%;
+font-size: 18px;
+font-weight: bold;
+box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+animation: checkPop 0.2s ease-out;
+}
+
+@keyframes checkPop {
+0% {
+transform: scale(0);
+}
+
+70% {
+transform: scale(1.15);
+}
+
+100% {
+transform: scale(1);
+}
+}
+
+/* =========================
+次へボタン
+========================= */
+
+#next-button {
+margin-top: 30px;
+padding: 15px 50px;
+border: none;
+border-radius: 999px;
+background: #222;
+color: #fff;
+font-size: 16px;
+font-weight: bold;
+cursor: pointer;
+transition:
+background 0.2s ease,
+color 0.2s ease,
+transform 0.2s ease,
+box-shadow 0.2s ease;
+}
+
+#next-button:hover {
+background: #b8ff00;
+color: #111;
+transform: translateY(-3px);
+box-shadow: 0 6px 15px rgba(184, 255, 0, 0.3);
+}
+
+#next-button:active {
+transform: translateY(1px);
+}
+
+/* =========================
+戻るボタン
+========================= */
+
+#ranking-screen > button:not(#next-button) {
+transition: 0.2s;
+}
+
+#ranking-screen > button:not(#next-button):hover {
+background: #f6ffdf !important;
+border-color: #b8ff00 !important;
+}
+
+/* =========================
+最終ランキング
+========================= */
+
+.rank-card {
+position: relative;
+background: #fff;
+border-radius: 22px;
+padding: 15px;
+margin-bottom: 20px;
+box-shadow: 0 5px 18px rgba(0, 0, 0, 0.06);
+border: 3px solid transparent;
+}
+
+.rank-card:hover {
+border-color: #dfff9c;
+transform: translateY(-3px);
+}
+
+.rank-number {
+font-size: 28px;
+font-weight: 800;
+margin-bottom: 10px;
+}
+
+.rank-card .member-image {
+max-width: 280px;
+}
+
+/* =========================
+   スマホ
+========================= */
+
+@media (max-width: 600px) {
+
+  .container {
+    padding: 12px 10px 15px;
+  }
+
+  /* ランキング画面のタイトル */
+  #ranking-screen h1 {
+    font-size: 21px;
+    margin-bottom: 12px;
+  }
+
+  #ranking-screen h1::after {
+    width: 30px;
+    height: 3px;
+    margin-top: 6px;
+  }
+
+  /* 説明 */
+  #instruction {
+    font-size: 12px;
+    padding: 6px 12px;
+    margin-bottom: 12px;
+  }
+
+  /* 4人を2×2で表示 */
+  #member-area {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+
+  /* メンバーカード */
+  .member-card {
+    padding: 6px;
+    border-radius: 12px;
+  }
+
+  /* 写真 */
+  .member-image {
+    aspect-ratio: 1 / 1;
+    border-radius: 9px;
+    margin-bottom: 5px;
+  }
+
+  /* 名前 */
+  .member-name {
+    font-size: 14px;
+    padding: 2px 0 4px;
+  }
+
+  /* 選択チェック */
+  .member-card.selected::after {
+    width: 23px;
+    height: 23px;
+    top: 6px;
+    right: 6px;
+    font-size: 13px;
+  }
+
+  /* 次へボタン */
+  #next-button {
+    margin-top: 10px;
+    padding: 10px 32px;
+    font-size: 14px;
+  }
+
+  /* スタート画面 */
+  #start-screen {
+    min-height: 90vh;
+  }
+
+  #start-screen h1 {
+    font-size: 28px;
+    margin-bottom: 20px;
+  }
+
+  .description {
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  .notes {
+    font-size: 12px;
+    margin-bottom: 22px;
+  }
+
+  #start-button {
+    padding: 13px 48px;
+    font-size: 16px;
+  }
+}

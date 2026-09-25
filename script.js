@@ -1057,6 +1057,8 @@ function startFinalRanking() {
 
 function showRankSelection() {
 
+  rankingScreen.classList.add("final-mode");
+
   memberArea.innerHTML = "";
 
 

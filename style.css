@@ -513,3 +513,31 @@ body {
     padding: 1px 0 2px;
   }
 }
+/* =========================
+   最終順位選択中
+   ========================= */
+
+@media (max-width: 600px) {
+
+  #ranking-screen.final-mode #member-area {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5px;
+  }
+
+  #ranking-screen.final-mode .member-card {
+    padding: 3px;
+    border-radius: 8px;
+    border-width: 2px;
+  }
+
+  #ranking-screen.final-mode .member-image {
+    border-radius: 6px;
+    margin-bottom: 1px;
+  }
+
+  #ranking-screen.final-mode .member-name {
+    font-size: 10px;
+    padding: 1px 0 2px;
+  }
+
+}

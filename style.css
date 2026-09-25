@@ -519,10 +519,10 @@ body {
 
 @media (max-width: 600px) {
 
-  #ranking-screen.final-mode #member-area {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 5px;
-  }
+#ranking-screen.final-mode #member-area {
+  grid-template-columns: repeat(4, 1fr);
+  gap: 4px;
+}
 
   #ranking-screen.final-mode .member-card {
     padding: 3px;

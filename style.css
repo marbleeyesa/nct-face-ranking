@@ -1,5 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Jost:wght@400;500;600;700;800&family=Nunito:wght@400;600;700;800&display=swap');
 
+:root {
+  --green: #b7ff00;
+  --green-light: #eaffb8;
+  --black: #111111;
+  --white: #ffffff;
+  --bg: #f5f6f1;
+  --gray: #777777;
+}
 
 /* =========================
    全体
@@ -11,155 +19,216 @@
 
 body {
   margin: 0;
-  background: #f5f6f1;
-  color: #222;
-  font-family: "Nunito", "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
-  overflow-x: hidden;
+  padding: 0;
+  background:
+    radial-gradient(circle at 10% 15%, rgba(183, 255, 0, 0.18) 0 45px, transparent 46px),
+    radial-gradient(circle at 92% 82%, rgba(183, 255, 0, 0.14) 0 60px, transparent 61px),
+    var(--bg);
+  color: var(--black);
+  font-family: "Nunito", sans-serif;
+  min-height: 100vh;
 }
 
-.container {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 40px 20px 60px;
-  text-align: center;
+/* 背景の小さなドット */
+
+body::before {
+  content: "";
+  position: fixed;
+  width: 140px;
+  height: 140px;
+  left: -45px;
+  bottom: 12%;
+  background-image: radial-gradient(#111 1.2px, transparent 1.2px);
+  background-size: 12px 12px;
+  opacity: 0.12;
+  pointer-events: none;
 }
 
+body::after {
+  content: "";
+  position: fixed;
+  width: 120px;
+  height: 120px;
+  right: -35px;
+  top: 18%;
+  background-image: radial-gradient(#111 1.2px, transparent 1.2px);
+  background-size: 12px 12px;
+  opacity: 0.12;
+  pointer-events: none;
+}
 
 /* =========================
    スタート画面
 ========================= */
 
 #start-screen {
-  min-height: 80vh;
+  min-height: 100vh;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+  padding: 30px 20px;
 }
 
+#start-screen > div {
+  width: min(500px, 100%);
+  text-align: center;
+  position: relative;
+}
+
+/* 上の小文字 */
+
+#start-screen > div::before {
+  content: "NEO CULTURE TECHNOLOGY";
+  display: inline-block;
+  font-family: "Jost", sans-serif;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 3px;
+  margin-bottom: 15px;
+  padding: 7px 13px;
+  border: 2px solid var(--black);
+  border-radius: 999px;
+  background: var(--white);
+  box-shadow: 3px 3px 0 var(--black);
+}
+
+/* タイトル */
+
 #start-screen h1 {
+  margin: 5px 0 0;
+  font-family: "Baloo 2", sans-serif;
+  font-size: clamp(50px, 12vw, 78px);
+  line-height: 0.9;
+  font-weight: 800;
+  letter-spacing: -2px;
   position: relative;
   display: inline-block;
-  margin: 0 0 28px;
-  color: #111;
-  font-family: "Baloo 2", sans-serif;
-  font-size: 46px;
-  font-weight: 800;
-  line-height: 1.1;
-  letter-spacing: 1px;
 }
+
+/* NCTっぽいグリーンのハイライト */
 
 #start-screen h1::after {
   content: "";
-  display: block;
-  width: 65px;
-  height: 7px;
-  margin: 12px auto 0;
-  background: #b8ff00;
-  border-radius: 999px;
-  transform: rotate(-2deg);
+  position: absolute;
+  left: -5px;
+  right: -5px;
+  bottom: 3px;
+  height: 15px;
+  background: var(--green);
+  z-index: -1;
+  transform: rotate(-1.5deg);
 }
 
-.description {
-  margin: 0 0 20px;
-  font-family: "Nunito", sans-serif;
-  font-size: 18px;
-  font-weight: 600;
-  line-height: 1.8;
-}
+/* サブタイトル */
 
-.notes {
-  margin: 0 0 30px;
-  color: #777;
+#start-screen p {
+  margin: 28px auto 35px;
   font-family: "Jost", sans-serif;
-  font-size: 13px;
-  line-height: 1.7;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  color: #444;
 }
 
-.notes p {
-  margin: 5px 0;
+/* 装飾 */
+
+#start-screen > div::after {
+  content: "✦  ♡  ✦";
+  display: block;
+  margin-top: 30px;
+  font-size: 22px;
+  letter-spacing: 12px;
 }
 
-
-/* =========================
-   スタートボタン
-========================= */
+/* STARTボタン */
 
 #start-button {
-  display: inline-block;
-  padding: 15px 65px;
-  border: 3px solid #222;
-  border-radius: 999px;
-  background: #b8ff00;
-  color: #111;
+  position: relative;
+  border: 3px solid var(--black);
+  border-radius: 18px;
+  background: var(--green);
+  color: var(--black);
+  padding: 17px 60px;
   font-family: "Jost", sans-serif;
   font-size: 17px;
   font-weight: 800;
-  letter-spacing: 0.5px;
+  letter-spacing: 2px;
   cursor: pointer;
-  box-shadow: 0 6px 0 #222;
+  box-shadow: 6px 6px 0 var(--black);
   transition: 0.15s ease;
 }
 
 #start-button:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 9px 0 #222;
+  transform: translate(2px, 2px);
+  box-shadow: 4px 4px 0 var(--black);
 }
 
 #start-button:active {
-  transform: translateY(3px);
-  box-shadow: 0 3px 0 #222;
+  transform: translate(6px, 6px);
+  box-shadow: none;
 }
-
 
 /* =========================
    ランキング画面
 ========================= */
 
 #ranking-screen {
-  display: none;
-}
-
-#ranking-screen h1 {
+  width: min(900px, 100%);
+  margin: 0 auto;
+  padding: 35px 20px 50px;
   position: relative;
+}
+
+/* 上部ラベル */
+
+#ranking-screen::before {
+  content: "NCT FACE RANKING";
   display: inline-block;
-  margin: 0 0 22px;
-  color: #111;
-  font-family: "Baloo 2", sans-serif;
-  font-size: 34px;
+  font-family: "Jost", sans-serif;
+  font-size: 10px;
   font-weight: 800;
-  line-height: 1.1;
-  letter-spacing: 1px;
+  letter-spacing: 2.5px;
+  border: 2px solid var(--black);
+  background: var(--white);
+  padding: 6px 12px;
+  border-radius: 999px;
+  box-shadow: 3px 3px 0 var(--black);
+  margin-bottom: 12px;
 }
 
-#ranking-screen h1::after {
-  content: "✦";
-  display: block;
-  margin-top: 5px;
-  color: #b8ff00;
-  font-family: Arial, sans-serif;
-  font-size: 18px;
+/* ROUNDタイトル */
+
+#ranking-screen h2 {
+  font-family: "Baloo 2", sans-serif;
+  font-size: clamp(34px, 7vw, 52px);
+  line-height: 1;
+  margin: 5px 0 10px;
+  font-weight: 800;
+  letter-spacing: -1px;
 }
 
-
-/* =========================
-   説明
-========================= */
+/* instruction */
 
 #instruction {
-  display: inline-block;
-  margin: 0 0 25px;
-  padding: 9px 20px;
-  border: 2px solid #222;
-  border-radius: 999px;
-  background: #222;
-  color: #fff;
   font-family: "Jost", sans-serif;
   font-size: 15px;
-  font-weight: 700;
-  letter-spacing: 0.3px;
+  font-weight: 600;
+  margin: 0 0 25px;
+  color: #444;
 }
 
+/* =========================
+   進捗ライン
+========================= */
+
+#ranking-screen h2::after {
+  content: "✦";
+  display: inline-block;
+  margin-left: 8px;
+  color: var(--green);
+  -webkit-text-stroke: 1.5px var(--black);
+  transform: rotate(10deg);
+}
 
 /* =========================
    メンバーエリア
@@ -167,10 +236,10 @@ body {
 
 #member-area {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 18px;
+  margin-top: 25px;
 }
-
 
 /* =========================
    メンバーカード
@@ -178,73 +247,68 @@ body {
 
 .member-card {
   position: relative;
-  padding: 10px;
-  overflow: hidden;
-  border: 3px solid #222;
+  background: var(--white);
+  border: 3px solid var(--black);
   border-radius: 20px;
-  background: #fff;
-  box-shadow: 5px 5px 0 #222;
+  padding: 10px;
   cursor: pointer;
-
+  box-shadow: 5px 5px 0 var(--black);
   transition:
-    transform 0.2s ease,
-    border-color 0.2s ease,
-    background 0.2s ease,
-    box-shadow 0.2s ease;
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    background 0.15s ease;
+  overflow: hidden;
+}
+
+/* カードの小さい装飾 */
+
+.member-card::before {
+  content: "✦";
+  position: absolute;
+  top: 7px;
+  right: 9px;
+  font-size: 15px;
+  color: var(--green);
+  -webkit-text-stroke: 1px var(--black);
+  z-index: 3;
 }
 
 .member-card:hover {
-  transform: translate(-2px, -4px);
-  border-color: #222;
-  box-shadow: 7px 8px 0 #b8ff00;
+  transform: translate(-2px, -3px) rotate(-0.5deg);
+  box-shadow: 7px 8px 0 var(--black);
 }
+
+/* 選択中 */
 
 .member-card.selected {
-  border-color: #222;
-  background: #f1ffd1;
-  transform: translate(-2px, -4px);
-  box-shadow: 7px 8px 0 #b8ff00;
+  background: var(--green-light);
+  border-color: var(--black);
+  box-shadow: 6px 6px 0 var(--green);
+  transform: translate(-1px, -2px);
 }
 
-.member-card.selected .member-image {
-  transform: scale(1.025);
-}
-
-.member-card:active {
-  transform: translate(1px, 1px);
-  box-shadow: 2px 2px 0 #222;
-}
-
-
-/* =========================
-   メンバー画像
-========================= */
+/* 画像 */
 
 .member-image {
   display: block;
   width: 100%;
-  aspect-ratio: 1 / 1;
-  object-fit: contain;
-  margin: 0 auto 8px;
+  aspect-ratio: 1 / 1.12;
+  object-fit: cover;
   border-radius: 13px;
-  background: #f3f3ef;
-  transition: transform 0.2s ease;
+  border: 2px solid var(--black);
+  background: #eeeeee;
 }
 
-
-/* =========================
-   メンバー名
-========================= */
+/* 名前 */
 
 .member-name {
-  padding: 3px 0 6px;
-  color: #111;
-  font-family: "Jost", "Nunito", sans-serif;
-  font-size: 20px;
+  font-family: "Jost", sans-serif;
+  font-size: 16px;
   font-weight: 800;
-  letter-spacing: 0.3px;
+  text-align: center;
+  margin-top: 9px;
+  letter-spacing: 0.5px;
 }
-
 
 /* =========================
    選択チェック
@@ -253,37 +317,29 @@ body {
 .member-card.selected::after {
   content: "✓";
   position: absolute;
-  top: 10px;
-  right: 10px;
-
-  width: 32px;
-  height: 32px;
-
+  left: 13px;
+  top: 13px;
+  width: 31px;
+  height: 31px;
   display: flex;
   align-items: center;
   justify-content: center;
-
-  border: 2px solid #222;
+  background: var(--green);
+  border: 3px solid var(--black);
   border-radius: 50%;
-
-  background: #b8ff00;
-  color: #111;
-
-  font-family: Arial, sans-serif;
-  font-size: 17px;
+  font-family: "Jost", sans-serif;
+  font-size: 18px;
   font-weight: 900;
-
-  box-shadow: 2px 2px 0 #222;
-
-  animation: checkPop 0.2s ease-out;
+  box-shadow: 2px 2px 0 var(--black);
+  animation: pop 0.18s ease-out;
 }
 
-@keyframes checkPop {
+@keyframes pop {
   0% {
-    transform: scale(0);
+    transform: scale(0.5);
   }
 
-  70% {
+  75% {
     transform: scale(1.15);
   }
 
@@ -292,143 +348,137 @@ body {
   }
 }
 
-
 /* =========================
-   次へボタン
+   ボタン
 ========================= */
 
 #next-button {
-  margin-top: 25px;
-  padding: 13px 45px;
-
-  border: 3px solid #222;
-  border-radius: 999px;
-
-  background: #222;
-  color: #fff;
-
+  margin-top: 30px;
+  border: 3px solid var(--black);
+  border-radius: 16px;
+  background: var(--black);
+  color: var(--white);
+  padding: 14px 45px;
   font-family: "Jost", sans-serif;
   font-size: 15px;
   font-weight: 800;
-  letter-spacing: 0.5px;
-
+  letter-spacing: 1.5px;
   cursor: pointer;
-
-  box-shadow: 4px 4px 0 #b8ff00;
-
+  box-shadow: 5px 5px 0 var(--green);
   transition: 0.15s ease;
 }
 
 #next-button:hover {
-  background: #b8ff00;
-  color: #111;
-  box-shadow: 5px 5px 0 #222;
-  transform: translate(-2px, -2px);
+  transform: translate(2px, 2px);
+  box-shadow: 3px 3px 0 var(--green);
 }
 
 #next-button:active {
-  transform: translate(1px, 1px);
-  box-shadow: 2px 2px 0 #222;
+  transform: translate(5px, 5px);
+  box-shadow: none;
 }
-
 
 /* =========================
    戻るボタン
 ========================= */
 
-#ranking-screen > button:not(#next-button) {
-  transition: 0.2s ease;
+#ranking-screen button:not(#next-button) {
+  font-family: "Jost", sans-serif !important;
+  font-weight: 700 !important;
+  border: 2px solid var(--black) !important;
+  background: var(--white) !important;
+  box-shadow: 3px 3px 0 var(--black);
+  transition: 0.15s ease;
 }
 
-#ranking-screen > button:not(#next-button):hover {
-  background: #f1ffd1 !important;
-  border-color: #b8ff00 !important;
+#ranking-screen button:not(#next-button):hover {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 var(--black);
 }
-
 
 /* =========================
-   最終ランキング
-========================= */
-
-.rank-card {
-  position: relative;
-  padding: 15px;
-  margin-bottom: 20px;
-
-  border: 3px solid #222;
-  border-radius: 20px;
-
-  background: #fff;
-
-  box-shadow: 5px 5px 0 #222;
-}
-
-.rank-card:hover {
-  border-color: #222;
-  transform: translate(-2px, -3px);
-  box-shadow: 6px 6px 0 #b8ff00;
-}
-
-.rank-number {
-  margin-bottom: 8px;
-  color: #111;
-  font-family: "Baloo 2", sans-serif;
-  font-size: 28px;
-  font-weight: 800;
-}
-
-.rank-card .member-image {
-  max-width: 280px;
-}
-
-
-/* =========================
-   最終順位選択中
-   PC
+   FINAL RANKING
 ========================= */
 
 #ranking-screen.final-mode #member-area {
+  max-width: 620px;
+  margin: 30px auto 0;
   grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-  max-width: 600px;
-  margin: 0 auto;
+  gap: 15px;
 }
 
 #ranking-screen.final-mode .member-card {
-  padding: 6px;
-  border-radius: 13px;
+  padding: 8px;
+  border-radius: 17px;
 }
 
 #ranking-screen.final-mode .member-image {
-  border-radius: 8px;
-  margin-bottom: 3px;
+  aspect-ratio: 1 / 1.08;
 }
 
 #ranking-screen.final-mode .member-name {
   font-size: 14px;
-  padding: 2px 0 3px;
 }
 
-#ranking-screen.final-mode .final-empty-card {
-  visibility: hidden;
-  padding: 6px;
-  border: 3px solid transparent;
-  border-radius: 13px;
+#ranking-screen.final-mode .member-card > div:first-child {
+  display: inline-block;
+  position: absolute;
+  top: 9px;
+  left: 9px;
+  z-index: 4;
+  background: var(--green);
+  border: 2px solid var(--black);
+  border-radius: 9px;
+  padding: 2px 7px;
+  font-family: "Jost", sans-serif;
+  font-size: 13px !important;
+  line-height: 1.2;
+  box-shadow: 2px 2px 0 var(--black);
 }
 
-#ranking-screen.final-mode .final-empty-card::before {
-  content: "";
-  display: block;
-  width: 100%;
-  aspect-ratio: 1 / 1;
+/* 空きカード */
+
+.final-empty-card {
+  border: 3px dashed #aaaaaa;
+  border-radius: 17px;
+  min-height: 170px;
+  background: rgba(255, 255, 255, 0.35);
 }
 
-#ranking-screen.final-mode .final-empty-card::after {
-  content: "";
-  display: block;
-  height: 20px;
+/* =========================
+   最終結果
+========================= */
+
+#ranking-screen.final-mode .member-card:nth-child(1) {
+  border-color: var(--black);
+  box-shadow: 7px 7px 0 var(--green);
 }
 
+#ranking-screen.final-mode .member-card:nth-child(2),
+#ranking-screen.final-mode .member-card:nth-child(3) {
+  box-shadow: 5px 5px 0 var(--black);
+}
+
+/* =========================
+   タブレット
+========================= */
+
+@media (max-width: 750px) {
+
+  #member-area {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+  }
+
+  .member-card {
+    border-radius: 17px;
+    padding: 8px;
+  }
+
+  .member-name {
+    font-size: 14px;
+  }
+}
 
 /* =========================
    スマホ
@@ -437,267 +487,176 @@ body {
 @media (max-width: 600px) {
 
   body {
-    min-height: 100vh;
-    overflow-x: hidden;
+    background:
+      radial-gradient(circle at 5% 10%, rgba(183, 255, 0, 0.2) 0 30px, transparent 31px),
+      radial-gradient(circle at 95% 90%, rgba(183, 255, 0, 0.16) 0 45px, transparent 46px),
+      var(--bg);
   }
-
-  .container {
-    width: 100%;
-    max-width: 100%;
-    padding: 5px 6px 8px;
-  }
-
-
-  /* =========================
-     スタート画面
-  ========================= */
 
   #start-screen {
-    min-height: calc(100vh - 10px);
-    padding: 8px 5px;
+    padding: 25px 18px;
+  }
+
+  #start-screen > div::before {
+    font-size: 9px;
+    letter-spacing: 2px;
+    padding: 6px 10px;
   }
 
   #start-screen h1 {
-    font-size: 30px;
-    margin-bottom: 18px;
+    font-size: clamp(47px, 15vw, 68px);
   }
 
-  #start-screen h1::after {
-    width: 40px;
-    height: 5px;
-    margin-top: 7px;
-  }
-
-  .description {
-    font-size: 14px;
-    line-height: 1.65;
-    margin-bottom: 15px;
-  }
-
-  .notes {
-    font-size: 11px;
-    margin-bottom: 19px;
-  }
-
-  .notes p {
-    margin: 3px 0;
+  #start-screen p {
+    font-size: 12px;
+    margin: 25px auto 30px;
+    letter-spacing: 1px;
   }
 
   #start-button {
-    padding: 12px 45px;
-    font-size: 15px;
-    border-width: 2px;
-    box-shadow: 4px 4px 0 #222;
+    width: min(260px, 90%);
+    padding: 15px 20px;
   }
 
-
-  /* =========================
-     ランキング画面
-  ========================= */
-
-  #ranking-screen h1 {
-    font-size: 23px;
-    margin-bottom: 6px;
+  #ranking-screen {
+    padding: 25px 14px 40px;
   }
 
-  #ranking-screen h1::after {
-    font-size: 14px;
-    margin-top: 2px;
+  #ranking-screen::before {
+    font-size: 8px;
+    padding: 5px 9px;
+  }
+
+  #ranking-screen h2 {
+    font-size: clamp(32px, 10vw, 45px);
   }
 
   #instruction {
-    font-size: 10px;
-    padding: 5px 10px;
-    margin-bottom: 6px;
-    border-width: 1px;
+    font-size: 13px;
+    margin-bottom: 20px;
   }
-
-
-  /* =========================
-     メンバーエリア
-  ========================= */
 
   #member-area {
     grid-template-columns: repeat(2, 1fr);
-    gap: 5px;
+    gap: 12px;
   }
 
   .member-card {
-    padding: 3px;
     border-width: 2px;
-    border-radius: 9px;
-    box-shadow: 3px 3px 0 #222;
+    border-radius: 15px;
+    padding: 6px;
+    box-shadow: 4px 4px 0 var(--black);
   }
 
   .member-card:hover {
     transform: none;
-    box-shadow: 3px 3px 0 #b8ff00;
+    box-shadow: 4px 4px 0 var(--black);
   }
 
   .member-card.selected {
-    transform: translate(-1px, -1px);
-    box-shadow: 4px 4px 0 #b8ff00;
+    box-shadow: 5px 5px 0 var(--green);
   }
 
   .member-image {
-    aspect-ratio: 1 / 1;
-    border-radius: 6px;
-    margin-bottom: 1px;
+    border-width: 2px;
+    border-radius: 10px;
   }
 
   .member-name {
-    font-size: 11px;
-    padding: 1px 0 2px;
+    font-size: 13px;
+    margin-top: 7px;
   }
 
   .member-card.selected::after {
-    width: 18px;
-    height: 18px;
-    top: 3px;
-    right: 3px;
-    font-size: 10px;
-    border-width: 1px;
-    box-shadow: 1px 1px 0 #222;
+    width: 27px;
+    height: 27px;
+    left: 8px;
+    top: 8px;
+    border-width: 2px;
+    font-size: 15px;
   }
-
-
-  /* =========================
-     次へボタン
-  ========================= */
 
   #next-button {
-    margin-top: 6px;
-    padding: 7px 25px;
-    font-size: 12px;
-    border-width: 2px;
-    box-shadow: 3px 3px 0 #b8ff00;
+    width: min(280px, 90%);
+    margin-top: 25px;
+    padding: 13px 20px;
   }
 
+  /* 9人選択のときは3列 */
 
-  /* =========================
-     9人以上の選抜画面
-     3列
-  ========================= */
-
-  #member-area:has(.member-card:nth-child(9)) {
+  #ranking-screen:not(.final-mode) #member-area:has(.member-card:nth-child(9)) {
     grid-template-columns: repeat(3, 1fr);
-    gap: 4px;
   }
 
-  #member-area:has(.member-card:nth-child(9)) .member-card {
-    padding: 2px;
-    border-radius: 7px;
-    border-width: 2px;
-    box-shadow: 2px 2px 0 #222;
-  }
-
-  #member-area:has(.member-card:nth-child(9)) .member-image {
-    border-radius: 5px;
-    margin-bottom: 0;
-  }
-
-  #member-area:has(.member-card:nth-child(9)) .member-name {
-    font-size: 9px;
-    line-height: 1.1;
-    padding: 1px 0;
-  }
-
-  #member-area:has(.member-card:nth-child(9)) .member-card.selected {
-    box-shadow: 3px 3px 0 #b8ff00;
-  }
-
-  #member-area:has(.member-card:nth-child(9)) .member-card.selected::after {
-    width: 15px;
-    height: 15px;
-    top: 2px;
-    right: 2px;
-    font-size: 8px;
-  }
-
-  #member-area:has(.member-card:nth-child(9)) + #next-button {
-    margin-top: 4px;
-    padding: 6px 22px;
-    font-size: 11px;
-  }
-
-
-  /* =========================
-     最終ランキング
-  ========================= */
-
-  .rank-card {
-    border-radius: 12px;
-    padding: 5px;
-    margin-bottom: 5px;
-    border-width: 2px;
-    box-shadow: 3px 3px 0 #222;
-  }
-
-  .rank-number {
-    font-size: 14px;
-    margin-bottom: 2px;
-  }
-
-  .rank-card .member-image {
-    max-width: 100%;
-    width: 100%;
-    aspect-ratio: 1 / 1;
-    border-radius: 7px;
-    margin-bottom: 2px;
-  }
-
-  .rank-card .member-name {
-    font-size: 11px;
-    padding: 1px 0 2px;
-  }
-
-
-  /* =========================
-     最終順位選択中
-     3列 × 3段固定
-  ========================= */
+  /* FINALは必ず3×3 */
 
   #ranking-screen.final-mode #member-area {
-    grid-template-columns: repeat(3, 1fr) !important;
-    gap: 4px !important;
-    max-width: 100%;
+    width: 100%;
+    max-width: 360px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 9px;
+    margin-top: 25px;
   }
 
   #ranking-screen.final-mode .member-card {
-    padding: 2px;
-    border-radius: 7px;
+    padding: 5px;
+    border-radius: 12px;
     border-width: 2px;
-    box-shadow: 2px 2px 0 #222;
+    box-shadow: 3px 3px 0 var(--black);
+  }
+
+  #ranking-screen.final-mode .member-card:hover {
+    transform: none;
+    box-shadow: 3px 3px 0 var(--black);
   }
 
   #ranking-screen.final-mode .member-image {
-    border-radius: 5px;
-    margin-bottom: 0;
+    border-radius: 8px;
+    border-width: 2px;
+  }
+
+  #ranking-screen.final-mode .member-name {
+    font-size: 10px;
+    margin-top: 5px;
+  }
+
+  #ranking-screen.final-mode .member-card > div:first-child {
+    top: 6px;
+    left: 6px;
+    border-width: 2px;
+    border-radius: 6px;
+    padding: 1px 5px;
+    font-size: 10px !important;
+    box-shadow: 1px 1px 0 var(--black);
+  }
+
+  .final-empty-card {
+    min-height: 0;
+    aspect-ratio: 1 / 1.22;
+    border-width: 2px;
+    border-radius: 12px;
+  }
+}
+
+/* =========================
+   かなり小さいスマホ
+========================= */
+
+@media (max-width: 380px) {
+
+  #member-area {
+    gap: 9px;
+  }
+
+  .member-name {
+    font-size: 12px;
+  }
+
+  #ranking-screen.final-mode #member-area {
+    gap: 7px;
   }
 
   #ranking-screen.final-mode .member-name {
     font-size: 9px;
-    line-height: 1.1;
-    padding: 1px 0;
-  }
-
-  #ranking-screen.final-mode .final-empty-card {
-    visibility: hidden;
-    padding: 2px;
-    border: 2px solid transparent;
-    border-radius: 7px;
-  }
-
-  #ranking-screen.final-mode .final-empty-card::before {
-    content: "";
-    display: block;
-    width: 100%;
-    aspect-ratio: 1 / 1;
-  }
-
-  #ranking-screen.final-mode .final-empty-card::after {
-    content: "";
-    display: block;
-    height: 12px;
   }
 }
